@@ -19,7 +19,7 @@ class InfoViewController: UIViewController {
 	func attributedText() -> NSAttributedString {
 		
 		let string = "Salt Shaker\n\nConcept and Design\nWill Douglas\n\nCoding and Creation\nMatthew Manzi" as NSString
-		let result = NSMutableAttributedString(string: string)
+		let result = NSMutableAttributedString(string: string as String)
 		
 		let shadow = NSShadow()
 		shadow.shadowColor = UIColor.darkGrayColor()
@@ -59,12 +59,12 @@ class InfoViewController: UIViewController {
 		view.addSubview(acknowledgements)
 		
 		
-		let doneButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
+		let doneButton = UIButton(type: UIButtonType.System)
 		doneButton.frame = CGRect(x: 0, y: view.bounds.height - 60, width: view.bounds.width, height: 60)
 		doneButton.setTitle("Close", forState: .Normal)
 		doneButton.titleLabel!.font = UIFont.systemFontOfSize(20)
 		doneButton.backgroundColor = UIColor(white: 215/255, alpha: 0.5)
-		doneButton.addTarget(self, action: "leaveInfoScreen:", forControlEvents: .TouchUpInside)
+		doneButton.addTarget(self, action: #selector(leaveInfoScreen), forControlEvents: .TouchUpInside)
 		
 		view.addSubview(doneButton)
 		

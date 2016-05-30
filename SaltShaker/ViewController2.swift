@@ -57,12 +57,12 @@ class ViewController2: UIViewController {
 	
 	func makeDoneButton() {
 		
-		doneButton = UIButton.buttonWithType(UIButtonType.System) as UIButton
+		doneButton = UIButton(type: UIButtonType.System)
 		doneButton.frame = CGRect(x: 0, y: view.bounds.height - 40, width: view.bounds.width, height: 40)
 		doneButton.setTitle("Close", forState: .Normal)
 		doneButton.titleLabel!.font = UIFont.systemFontOfSize(20)
 		doneButton.backgroundColor = UIColor(white: 215/255, alpha: 0.5)
-		doneButton.addTarget(self, action: "leaveScreen:", forControlEvents: .TouchUpInside)
+		doneButton.addTarget(self, action: #selector(leaveScreen), forControlEvents: .TouchUpInside)
 		
 		view.addSubview(doneButton)
 		
@@ -295,8 +295,13 @@ class ViewController2: UIViewController {
 		endRectLarge1 = CGRect(x: 0.0, y: 170.0, width: 320.0, height: 434.9)
 		endRectLarge2 = CGRect(x: (screenSize.width - 320.0), y: 170.0, width: 320.0, height: 434.9)
 
-		audioPlayer = AVAudioPlayer(contentsOfURL: shakeSound, error: nil)
-		audioPlayer.prepareToPlay()
+		do {
+			audioPlayer = try AVAudioPlayer(contentsOfURL: shakeSound, fileTypeHint: nil)
+			audioPlayer.prepareToPlay()
+		} catch {
+			print("Could not play sound")
+			print(error)
+		}
 		
 		makeDoneButton()
 		
@@ -316,7 +321,7 @@ class ViewController2: UIViewController {
 	
 	func animateForNormalScreen() {
 		
-		UIView.animateKeyframesWithDuration(audioPlayer.duration, delay: 0.0, options: nil, animations: {
+		UIView.animateKeyframesWithDuration(audioPlayer.duration, delay: 0.0, options: [], animations: {
 			
 			
 			UIView.addKeyframeWithRelativeStartTime(0/60, relativeDuration: 10/60, animations: { _ in
@@ -411,7 +416,7 @@ class ViewController2: UIViewController {
 	
 	func animateForLargeScreen() {
 		
-		UIView.animateKeyframesWithDuration(audioPlayer.duration, delay: 0.0, options: nil, animations: {
+		UIView.animateKeyframesWithDuration(audioPlayer.duration, delay: 0.0, options: [], animations: {
 			
 			
 			UIView.addKeyframeWithRelativeStartTime(0/60, relativeDuration: 10/60, animations: { _ in
@@ -598,7 +603,7 @@ class ViewController2: UIViewController {
 		
 	}
 	
-	override func motionBegan(motion: UIEventSubtype, withEvent event: UIEvent) {
+	override func motionBegan(motion: UIEventSubtype, withEvent event: UIEvent?) {
 		
 		// Code for playing sound
 		audioPlayer.play()
@@ -618,9 +623,9 @@ class ViewController2: UIViewController {
 		
 	}
 	
-	override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
+	override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
 		
-		println("Motion did end")
+		print("Motion did end")
 		
 	}
 

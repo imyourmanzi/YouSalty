@@ -35,7 +35,7 @@ class HomeScreenViewController: UIViewController {
 		
 		let saltButtonPoint = CGPoint(x: view.center.x, y: view.center.y - 20)
 		
-		saltButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+		saltButton = UIButton(type: UIButtonType.Custom)
 		saltButton.frame.size = buttonSize
 		saltButton.center = saltButtonPoint
 		saltButton.setBackgroundImage(normalButtonImage, forState: .Normal)
@@ -46,7 +46,7 @@ class HomeScreenViewController: UIViewController {
 		
 		view.addSubview(saltButton)
 		
-		saltButton.addTarget(self, action: "openSaltViewController:", forControlEvents: .TouchUpInside)
+		saltButton.addTarget(self, action: #selector(openSaltViewController), forControlEvents: .TouchUpInside)
 		
 	}
 	
@@ -54,7 +54,7 @@ class HomeScreenViewController: UIViewController {
 		
 		let pepperButtonPoint = CGPoint(x: view.center.x, y: view.center.y + 60)
 		
-		pepperButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+		pepperButton = UIButton(type: UIButtonType.Custom)
 		pepperButton.frame.size = buttonSize
 		pepperButton.center = pepperButtonPoint
 		pepperButton.setBackgroundImage(normalButtonImage, forState: .Normal)
@@ -65,7 +65,7 @@ class HomeScreenViewController: UIViewController {
 	
 		view.addSubview(pepperButton)
 		
-		pepperButton.addTarget(self, action: "openPepperViewController:", forControlEvents: .TouchUpInside)
+		pepperButton.addTarget(self, action: #selector(openPepperViewController), forControlEvents: .TouchUpInside)
 		
 	}
 	
@@ -73,7 +73,7 @@ class HomeScreenViewController: UIViewController {
 		
 		let infoButtonPoint = CGPoint(x: view.center.x, y: view.center.y + 140)
 		
-		infoButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+		infoButton = UIButton(type: UIButtonType.Custom)
 		infoButton.frame.size = CGSize(width: 70, height: 45)
 		infoButton.center = infoButtonPoint
 		infoButton.setBackgroundImage(normalButtonImage, forState: .Normal)
@@ -84,7 +84,7 @@ class HomeScreenViewController: UIViewController {
 		
 		view.addSubview(infoButton)
 		
-		infoButton.addTarget(self, action: "openInfoViewController:", forControlEvents: .TouchUpInside)
+		infoButton.addTarget(self, action: #selector(openInfoViewController), forControlEvents: .TouchUpInside)
 		
 	}
 	
