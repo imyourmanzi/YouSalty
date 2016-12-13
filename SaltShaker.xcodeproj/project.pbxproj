@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9802C6C31A81206E00DDFB13 /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9802C6C21A81206E00DDFB13 /* ViewController2.swift */; };
+		8A7EA9DD1E00627600B00FD3 /* ShakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7EA9DC1E00627600B00FD3 /* ShakerViewController.swift */; };
 		9802C6C51A81210B00DDFB13 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9802C6C41A81210B00DDFB13 /* HomeScreenViewController.swift */; };
 		9802C6CB1A81294200DDFB13 /* blankButtonHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9802C6C71A81294200DDFB13 /* blankButtonHighlighted.png */; };
 		9802C6CD1A81294200DDFB13 /* blankButtonNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9802C6C91A81294200DDFB13 /* blankButtonNormal.png */; };
 		9802C6CF1A82C92D00DDFB13 /* pepperShaker.png in Resources */ = {isa = PBXBuildFile; fileRef = 988F03821A7E989C00D2ECA5 /* pepperShaker.png */; };
 		9802C6D11A82CA9A00DDFB13 /* LogoImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9802C6D01A82CA9A00DDFB13 /* LogoImage.png */; };
 		987ADD991A25276500B09042 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987ADD981A25276500B09042 /* AppDelegate.swift */; };
-		987ADD9B1A25276500B09042 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987ADD9A1A25276500B09042 /* ViewController.swift */; };
 		987ADD9E1A25276500B09042 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 987ADD9C1A25276500B09042 /* Main.storyboard */; };
 		987ADDA01A25276500B09042 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987ADD9F1A25276500B09042 /* Images.xcassets */; };
 		987ADDAF1A25276600B09042 /* SaltShakerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987ADDAE1A25276600B09042 /* SaltShakerTests.swift */; };
@@ -40,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8A7EA9DC1E00627600B00FD3 /* ShakerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShakerViewController.swift; sourceTree = "<group>"; };
 		9802C6C21A81206E00DDFB13 /* ViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		9802C6C41A81210B00DDFB13 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		9802C6C71A81294200DDFB13 /* blankButtonHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blankButtonHighlighted.png; sourceTree = "<group>"; };
@@ -226,14 +226,15 @@
 			children = (
 				987ADD981A25276500B09042 /* AppDelegate.swift */,
 				9802C6C41A81210B00DDFB13 /* HomeScreenViewController.swift */,
-				987ADD9A1A25276500B09042 /* ViewController.swift */,
-				9802C6C21A81206E00DDFB13 /* ViewController2.swift */,
+				8A7EA9DC1E00627600B00FD3 /* ShakerViewController.swift */,
 				98CFDA5B1A61F78500362CD6 /* InfoViewController.swift */,
 				988F029A1A7DC9D800D2ECA5 /* Media Source */,
 				985805E41A696925002BCB05 /* Fonts */,
 				987ADD9C1A25276500B09042 /* Main.storyboard */,
 				987ADD9F1A25276500B09042 /* Images.xcassets */,
 				987ADD961A25276500B09042 /* Supporting Files */,
+				987ADD9A1A25276500B09042 /* ViewController.swift */,
+				9802C6C21A81206E00DDFB13 /* ViewController2.swift */,
 			);
 			path = SaltShaker;
 			sourceTree = "<group>";
@@ -485,15 +486,17 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					987ADD921A25276500B09042 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = ME5B7KYXVH;
+						LastSwiftMigration = 0820;
 					};
 					987ADDA71A25276600B09042 = {
 						CreatedOnToolsVersion = 6.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 987ADD921A25276500B09042;
 					};
 				};
@@ -553,10 +556,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				987ADD9B1A25276500B09042 /* ViewController.swift in Sources */,
-				9802C6C31A81206E00DDFB13 /* ViewController2.swift in Sources */,
 				98CFDA5C1A61F78500362CD6 /* InfoViewController.swift in Sources */,
 				987ADD991A25276500B09042 /* AppDelegate.swift in Sources */,
+				8A7EA9DD1E00627600B00FD3 /* ShakerViewController.swift in Sources */,
 				9802C6C51A81210B00DDFB13 /* HomeScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,8 +606,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -614,6 +618,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -647,8 +652,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -656,6 +663,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -665,6 +673,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -682,6 +691,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.VMM.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -699,6 +709,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.VMM.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -719,6 +730,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.VMM.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SaltShaker.app/SaltShaker";
 			};
 			name = Debug;
@@ -735,6 +747,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.VMM.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SaltShaker.app/SaltShaker";
 			};
 			name = Release;

@@ -9,10 +9,6 @@
 import UIKit
 
 class HomeScreenViewController: UIViewController {
-
-	let VC = ViewController()
-	let VC2 = ViewController2()
-	let iVC = InfoViewController()
 	
 	var saltButton: UIButton!
 	var pepperButton: UIButton!
@@ -25,28 +21,27 @@ class HomeScreenViewController: UIViewController {
 	
 	var logoImageView: UIImageView!
 	let logoImage = UIImage(named: "LogoImage")
-	
-	override func prefersStatusBarHidden() -> Bool {
-
-		return true
-	}
-	
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
 	func createSaltButton() {
 		
 		let saltButtonPoint = CGPoint(x: view.center.x, y: view.center.y - 20)
 		
-		saltButton = UIButton(type: UIButtonType.Custom)
+		saltButton = UIButton(type: UIButtonType.custom)
 		saltButton.frame.size = buttonSize
 		saltButton.center = saltButtonPoint
-		saltButton.setBackgroundImage(normalButtonImage, forState: .Normal)
-		saltButton.setBackgroundImage(highlightedButtonImage, forState: .Highlighted)
-		saltButton.setTitle("Salt Shaker", forState: .Normal)
-		saltButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-		saltButton.setTitleShadowColor(UIColor.darkGrayColor(), forState: .Normal)
+		saltButton.setBackgroundImage(normalButtonImage, for: UIControlState())
+		saltButton.setBackgroundImage(highlightedButtonImage, for: .highlighted)
+		saltButton.setTitle("Salt Shaker", for: UIControlState())
+		saltButton.setTitleColor(UIColor.white, for: UIControlState())
+		saltButton.setTitleShadowColor(UIColor.darkGray, for: UIControlState())
 		
 		view.addSubview(saltButton)
 		
-		saltButton.addTarget(self, action: #selector(openSaltViewController), forControlEvents: .TouchUpInside)
+		saltButton.addTarget(self, action: #selector(openSaltViewController), for: .touchUpInside)
 		
 	}
 	
@@ -54,18 +49,18 @@ class HomeScreenViewController: UIViewController {
 		
 		let pepperButtonPoint = CGPoint(x: view.center.x, y: view.center.y + 60)
 		
-		pepperButton = UIButton(type: UIButtonType.Custom)
+		pepperButton = UIButton(type: UIButtonType.custom)
 		pepperButton.frame.size = buttonSize
 		pepperButton.center = pepperButtonPoint
-		pepperButton.setBackgroundImage(normalButtonImage, forState: .Normal)
-		pepperButton.setBackgroundImage(highlightedButtonImage, forState: .Highlighted)
-		pepperButton.setTitle("Pepper Shaker", forState: .Normal)
-		pepperButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-		pepperButton.setTitleShadowColor(UIColor.darkGrayColor(), forState: .Normal)
+		pepperButton.setBackgroundImage(normalButtonImage, for: UIControlState())
+		pepperButton.setBackgroundImage(highlightedButtonImage, for: .highlighted)
+		pepperButton.setTitle("Pepper Shaker", for: UIControlState())
+		pepperButton.setTitleColor(UIColor.white, for: UIControlState())
+		pepperButton.setTitleShadowColor(UIColor.darkGray, for: UIControlState())
 	
 		view.addSubview(pepperButton)
 		
-		pepperButton.addTarget(self, action: #selector(openPepperViewController), forControlEvents: .TouchUpInside)
+		pepperButton.addTarget(self, action: #selector(openPepperViewController), for: .touchUpInside)
 		
 	}
 	
@@ -73,36 +68,47 @@ class HomeScreenViewController: UIViewController {
 		
 		let infoButtonPoint = CGPoint(x: view.center.x, y: view.center.y + 140)
 		
-		infoButton = UIButton(type: UIButtonType.Custom)
+		infoButton = UIButton(type: UIButtonType.custom)
 		infoButton.frame.size = CGSize(width: 70, height: 45)
 		infoButton.center = infoButtonPoint
-		infoButton.setBackgroundImage(normalButtonImage, forState: .Normal)
-		infoButton.setBackgroundImage(highlightedButtonImage, forState: .Highlighted)
-		infoButton.setTitle("Credits", forState: .Normal)
-		infoButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-		infoButton.setTitleShadowColor(UIColor.darkGrayColor(), forState: .Normal)
+		infoButton.setBackgroundImage(normalButtonImage, for: UIControlState())
+		infoButton.setBackgroundImage(highlightedButtonImage, for: .highlighted)
+		infoButton.setTitle("Credits", for: UIControlState())
+		infoButton.setTitleColor(UIColor.white, for: UIControlState())
+		infoButton.setTitleShadowColor(UIColor.darkGray, for: UIControlState())
 		
 		view.addSubview(infoButton)
 		
-		infoButton.addTarget(self, action: #selector(openInfoViewController), forControlEvents: .TouchUpInside)
+		infoButton.addTarget(self, action: #selector(openInfoViewController), for: .touchUpInside)
 		
 	}
 	
-	func openSaltViewController(sender: UIButton) {
+	func openSaltViewController() {
 		
-		presentViewController(VC, animated: true, completion: nil)
+        let saltVc = ShakerViewController()
+        saltVc.shakerName = "saltShaker v2"
+        saltVc.particlesName = "Particles"
+        saltVc.soundName = "salt_shake4"
+        
+		present(saltVc, animated: true, completion: nil)
 		
 	}
 	
-	func openPepperViewController(sender: UIButton) {
+	func openPepperViewController() {
 		
-		presentViewController(VC2, animated: true, completion: nil)
+        let pepperVc = ShakerViewController()
+        pepperVc.shakerName = "pepperShaker"
+        pepperVc.particlesName = "PepperParticles"
+        pepperVc.soundName = "pepper_shake2"
+        
+		present(pepperVc, animated: true, completion: nil)
 		
 	}
 	
-	func openInfoViewController(sender: UIButton) {
-		
-		presentViewController(iVC, animated: true, completion: nil)
+	func openInfoViewController() {
+
+        let infoVc = InfoViewController()
+		present(infoVc, animated: true, completion: nil)
 		
 	}
 	
@@ -123,9 +129,4 @@ class HomeScreenViewController: UIViewController {
 		
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-	
 }

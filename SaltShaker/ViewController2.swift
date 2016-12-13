@@ -24,10 +24,10 @@ class ViewController2: UIViewController {
 	var particles1Lrg, particles2Lrg, particles3Lrg, particles4Lrg, particles5Lrg, particles6Lrg: UIImageView?
 	var particles1bLrg, particles2bLrg, particles3bLrg, particles4bLrg, particles5bLrg, particles6bLrg: UIImageView?
 	
-	let shakeSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("pepper_shake2", ofType: "wav")!)
+	let shakeSound = URL(fileURLWithPath: Bundle.main.path(forResource: "pepper_shake2", ofType: "wav")!)
 	var audioPlayer = AVAudioPlayer()
 	
-	let screenSize: CGSize = UIScreen.mainScreen().bounds.size
+	let screenSize: CGSize = UIScreen.main.bounds.size
 	var screenXCenter: CGFloat?
 	var imgXPos: CGFloat?
 	
@@ -50,27 +50,26 @@ class ViewController2: UIViewController {
 	var theMotion: UIEventSubtype?
 	var theEvent: UIEvent?
 	
-	override func prefersStatusBarHidden() -> Bool {
-
+	override var prefersStatusBarHidden : Bool {
 		return true
 	}
 	
 	func makeDoneButton() {
 		
-		doneButton = UIButton(type: UIButtonType.System)
+		doneButton = UIButton(type: UIButtonType.system)
 		doneButton.frame = CGRect(x: 0, y: view.bounds.height - 40, width: view.bounds.width, height: 40)
-		doneButton.setTitle("Close", forState: .Normal)
-		doneButton.titleLabel!.font = UIFont.systemFontOfSize(20)
+		doneButton.setTitle("Close", for: UIControlState())
+		doneButton.titleLabel!.font = UIFont.systemFont(ofSize: 20)
 		doneButton.backgroundColor = UIColor(white: 215/255, alpha: 0.5)
-		doneButton.addTarget(self, action: #selector(leaveScreen), forControlEvents: .TouchUpInside)
+		doneButton.addTarget(self, action: #selector(leaveScreen), for: .touchUpInside)
 		
 		view.addSubview(doneButton)
 		
 	}
 	
-	func leaveScreen(sender: UIButton) {
+	func leaveScreen(_ sender: UIButton) {
 		
-		dismissViewControllerAnimated(true, completion: nil)
+		dismiss(animated: true, completion: nil)
 		
 	}
 	
@@ -296,7 +295,7 @@ class ViewController2: UIViewController {
 		endRectLarge2 = CGRect(x: (screenSize.width - 320.0), y: 170.0, width: 320.0, height: 434.9)
 
 		do {
-			audioPlayer = try AVAudioPlayer(contentsOfURL: shakeSound, fileTypeHint: nil)
+			audioPlayer = try AVAudioPlayer(contentsOf: shakeSound, fileTypeHint: nil)
 			audioPlayer.prepareToPlay()
 		} catch {
 			print("Could not play sound")
@@ -321,73 +320,73 @@ class ViewController2: UIViewController {
 	
 	func animateForNormalScreen() {
 		
-		UIView.animateKeyframesWithDuration(audioPlayer.duration, delay: 0.0, options: [], animations: {
+		UIView.animateKeyframes(withDuration: audioPlayer.duration, delay: 0.0, options: [], animations: {
 			
 			
-			UIView.addKeyframeWithRelativeStartTime(0/60, relativeDuration: 10/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 0/60, relativeDuration: 10/60, animations: { _ in
 				self.shakerView.frame = self.endRect
 			})
-			UIView.addKeyframeWithRelativeStartTime(10/60, relativeDuration: 20/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 10/60, relativeDuration: 20/60, animations: { _ in
 				self.shakerView.frame = self.startRect
 			})
 			
-			UIView.addKeyframeWithRelativeStartTime(9/60, relativeDuration: 19/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 9/60, relativeDuration: 19/60, animations: { _ in
 				// Salt particle layer one
 				self.particles1.frame = self.partsEndRect
 			})
-			UIView.addKeyframeWithRelativeStartTime(12/60, relativeDuration: 18/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 12/60, relativeDuration: 18/60, animations: { _ in
 				// Salt particle layer two
 				self.particles2.frame = self.partsEndRect
 			})
-			UIView.addKeyframeWithRelativeStartTime(15/60, relativeDuration: 22/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 15/60, relativeDuration: 22/60, animations: { _ in
 				// Salt particle layer three
 				self.particles3.frame = self.partsEndRect
 			})
-			UIView.addKeyframeWithRelativeStartTime(18/60, relativeDuration: 20/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 18/60, relativeDuration: 20/60, animations: { _ in
 				// Salt particle layer four
 				self.particles4.frame = self.partsEndRect
 			})
-			UIView.addKeyframeWithRelativeStartTime(21/60, relativeDuration: 15/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 21/60, relativeDuration: 15/60, animations: { _ in
 				// Salt particle layer five
 				self.particles5.frame = self.partsEndRect
 			})
-			UIView.addKeyframeWithRelativeStartTime(24/60, relativeDuration: 17/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 24/60, relativeDuration: 17/60, animations: { _ in
 				// Salt particle layer six
 				self.particles6.frame = self.partsEndRect
 			})
 			
 			
-			self.motionEnded(self.theMotion!, withEvent: self.theEvent!)
+			self.motionEnded(self.theMotion!, with: self.theEvent!)
 			
 			
-			UIView.addKeyframeWithRelativeStartTime(30/60, relativeDuration: 10/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 30/60, relativeDuration: 10/60, animations: { _ in
 				self.shakerView.frame = self.endRect
 			})
-			UIView.addKeyframeWithRelativeStartTime(40/60, relativeDuration: 20/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 40/60, relativeDuration: 20/60, animations: { _ in
 				self.shakerView.frame = self.startRect
 			})
 			
-			UIView.addKeyframeWithRelativeStartTime(39/60, relativeDuration: 19/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 39/60, relativeDuration: 19/60, animations: { _ in
 				// Salt particle layer one
 				self.particles1b.frame = self.partsEndRect
 			})
-			UIView.addKeyframeWithRelativeStartTime(42/60, relativeDuration: 18/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 42/60, relativeDuration: 18/60, animations: { _ in
 				// Salt particle layer two
 				self.particles2b.frame = self.partsEndRect
 			})
-			UIView.addKeyframeWithRelativeStartTime(45/60, relativeDuration: 22/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 45/60, relativeDuration: 22/60, animations: { _ in
 				// Salt particle layer three
 				self.particles3b.frame = self.partsEndRect
 			})
-			UIView.addKeyframeWithRelativeStartTime(48/60, relativeDuration: 20/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 48/60, relativeDuration: 20/60, animations: { _ in
 				// Salt particle layer four
 				self.particles4b.frame = self.partsEndRect
 			})
-			UIView.addKeyframeWithRelativeStartTime(51/60, relativeDuration: 15/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 51/60, relativeDuration: 15/60, animations: { _ in
 				// Salt particle layer five
 				self.particles5b.frame = self.partsEndRect
 			})
-			UIView.addKeyframeWithRelativeStartTime(54/60, relativeDuration: 17/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 54/60, relativeDuration: 17/60, animations: { _ in
 				// Salt particle layer six
 				self.particles6b.frame = self.partsEndRect
 			})
@@ -416,19 +415,19 @@ class ViewController2: UIViewController {
 	
 	func animateForLargeScreen() {
 		
-		UIView.animateKeyframesWithDuration(audioPlayer.duration, delay: 0.0, options: [], animations: {
+		UIView.animateKeyframes(withDuration: audioPlayer.duration, delay: 0.0, options: [], animations: {
 			
 			
-			UIView.addKeyframeWithRelativeStartTime(0/60, relativeDuration: 10/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 0/60, relativeDuration: 10/60, animations: { _ in
 				self.shakerView.frame = self.endRectLarge1
 				self.shakerView2!.frame = self.endRectLarge2
 			})
-			UIView.addKeyframeWithRelativeStartTime(10/60, relativeDuration: 20/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 10/60, relativeDuration: 20/60, animations: { _ in
 				self.shakerView.frame = self.startRectLarge1
 				self.shakerView2!.frame = self.startRectLarge2
 			})
 			
-			UIView.addKeyframeWithRelativeStartTime(9/60, relativeDuration: 19/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 9/60, relativeDuration: 19/60, animations: { _ in
 				// Salt particle layer one
 				self.particles1.frame = self.partsEndRectLarge1
 				self.particles1Lrg!.frame = self.partsEndRectLarge2
@@ -436,7 +435,7 @@ class ViewController2: UIViewController {
 				self.particles1.alpha = 0.2
 				self.particles1Lrg!.alpha = 0.2
 			})
-			UIView.addKeyframeWithRelativeStartTime(12/60, relativeDuration: 18/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 12/60, relativeDuration: 18/60, animations: { _ in
 				// Salt particle layer two
 				self.particles2.frame = self.partsEndRectLarge1
 				self.particles2Lrg!.frame = self.partsEndRectLarge2
@@ -444,7 +443,7 @@ class ViewController2: UIViewController {
 				self.particles2.alpha = 0.2
 				self.particles2Lrg!.alpha = 0.2
 			})
-			UIView.addKeyframeWithRelativeStartTime(15/60, relativeDuration: 22/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 15/60, relativeDuration: 22/60, animations: { _ in
 				// Salt particle layer three
 				self.particles3.frame = self.partsEndRectLarge1
 				self.particles3Lrg!.frame = self.partsEndRectLarge2
@@ -452,7 +451,7 @@ class ViewController2: UIViewController {
 				self.particles3.alpha = 0.2
 				self.particles3Lrg!.alpha = 0.2
 			})
-			UIView.addKeyframeWithRelativeStartTime(18/60, relativeDuration: 20/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 18/60, relativeDuration: 20/60, animations: { _ in
 				// Salt particle layer four
 				self.particles4.frame = self.partsEndRectLarge1
 				self.particles4Lrg!.frame = self.partsEndRectLarge2
@@ -460,7 +459,7 @@ class ViewController2: UIViewController {
 				self.particles4.alpha = 0.2
 				self.particles4Lrg!.alpha = 0.2
 			})
-			UIView.addKeyframeWithRelativeStartTime(21/60, relativeDuration: 15/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 21/60, relativeDuration: 15/60, animations: { _ in
 				// Salt particle layer five
 				self.particles5.frame = self.partsEndRectLarge1
 				self.particles5Lrg!.frame = self.partsEndRectLarge2
@@ -468,7 +467,7 @@ class ViewController2: UIViewController {
 				self.particles5.alpha = 0.2
 				self.particles5Lrg!.alpha = 0.2
 			})
-			UIView.addKeyframeWithRelativeStartTime(24/60, relativeDuration: 17/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 24/60, relativeDuration: 17/60, animations: { _ in
 				// Salt particle layer six
 				self.particles6.frame = self.partsEndRectLarge1
 				self.particles6Lrg!.frame = self.partsEndRectLarge2
@@ -477,18 +476,18 @@ class ViewController2: UIViewController {
 				self.particles6Lrg!.alpha = 0.2
 			})
 			
-			self.motionEnded(self.theMotion!, withEvent: self.theEvent!)
+			self.motionEnded(self.theMotion!, with: self.theEvent!)
 			
-			UIView.addKeyframeWithRelativeStartTime(30/60, relativeDuration: 10/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 30/60, relativeDuration: 10/60, animations: { _ in
 				self.shakerView.frame = self.endRectLarge1
 				self.shakerView2!.frame = self.endRectLarge2
 			})
-			UIView.addKeyframeWithRelativeStartTime(40/60, relativeDuration: 20/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 40/60, relativeDuration: 20/60, animations: { _ in
 				self.shakerView.frame = self.startRectLarge1
 				self.shakerView2!.frame = self.startRectLarge2
 			})
 			
-			UIView.addKeyframeWithRelativeStartTime(9/60, relativeDuration: 19/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 9/60, relativeDuration: 19/60, animations: { _ in
 				// Salt particle layer one
 				self.particles1b.frame = self.partsEndRectLarge1
 				self.particles1bLrg!.frame = self.partsEndRectLarge2
@@ -496,7 +495,7 @@ class ViewController2: UIViewController {
 				self.particles1b.alpha = 0.2
 				self.particles1bLrg!.alpha = 0.2
 			})
-			UIView.addKeyframeWithRelativeStartTime(12/60, relativeDuration: 18/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 12/60, relativeDuration: 18/60, animations: { _ in
 				// Salt particle layer two
 				self.particles2b.frame = self.partsEndRectLarge1
 				self.particles2bLrg!.frame = self.partsEndRectLarge2
@@ -504,7 +503,7 @@ class ViewController2: UIViewController {
 				self.particles2b.alpha = 0.2
 				self.particles2bLrg!.alpha = 0.2
 			})
-			UIView.addKeyframeWithRelativeStartTime(15/60, relativeDuration: 22/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 15/60, relativeDuration: 22/60, animations: { _ in
 				// Salt particle layer three
 				self.particles3b.frame = self.partsEndRectLarge1
 				self.particles3bLrg!.frame = self.partsEndRectLarge2
@@ -512,7 +511,7 @@ class ViewController2: UIViewController {
 				self.particles3b.alpha = 0.2
 				self.particles3bLrg!.alpha = 0.2
 			})
-			UIView.addKeyframeWithRelativeStartTime(18/60, relativeDuration: 20/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 18/60, relativeDuration: 20/60, animations: { _ in
 				// Salt particle layer four
 				self.particles4b.frame = self.partsEndRectLarge1
 				self.particles4bLrg!.frame = self.partsEndRectLarge2
@@ -520,7 +519,7 @@ class ViewController2: UIViewController {
 				self.particles4b.alpha = 0.2
 				self.particles4bLrg!.alpha = 0.2
 			})
-			UIView.addKeyframeWithRelativeStartTime(21/60, relativeDuration: 15/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 21/60, relativeDuration: 15/60, animations: { _ in
 				// Salt particle layer five
 				self.particles5b.frame = self.partsEndRectLarge1
 				self.particles5bLrg!.frame = self.partsEndRectLarge2
@@ -528,7 +527,7 @@ class ViewController2: UIViewController {
 				self.particles5b.alpha = 0.2
 				self.particles5bLrg!.alpha = 0.2
 			})
-			UIView.addKeyframeWithRelativeStartTime(24/60, relativeDuration: 17/60, animations: { _ in
+			UIView.addKeyframe(withRelativeStartTime: 24/60, relativeDuration: 17/60, animations: { _ in
 				// Salt particle layer six
 				self.particles6b.frame = self.partsEndRectLarge1
 				self.particles6bLrg!.frame = self.partsEndRectLarge2
@@ -603,7 +602,7 @@ class ViewController2: UIViewController {
 		
 	}
 	
-	override func motionBegan(motion: UIEventSubtype, withEvent event: UIEvent?) {
+	override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
 		
 		// Code for playing sound
 		audioPlayer.play()
@@ -623,7 +622,7 @@ class ViewController2: UIViewController {
 		
 	}
 	
-	override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+	override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
 		
 		print("Motion did end")
 		
