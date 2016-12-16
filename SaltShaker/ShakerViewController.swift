@@ -2,7 +2,7 @@
 //  ShakerViewController.swift
 //  SaltShaker
 //
-//  Created by Matt Manzi on 12/13/16.
+//  Created by Matthew Manzi on 12/13/16.
 //
 //
 
@@ -11,53 +11,62 @@ import AVFoundation
 
 class ShakerViewController: UIViewController {
 
-    // Instantiation-time variables (view specific)
+    // Instantiation-time variables (shaker specific)
     var shakerName: String = "saltShaker"
     var particlesName: String = "Particles"
     var soundName: String = "salt_shake4"
     
-    
     // View variables
+    let screenSize: CGSize = UIScreen.main.bounds.size
+    var screenXCenter: CGFloat!
+    var imgXPos: CGFloat!
+    var isLargeScreen = false
     var doneButton: UIButton!
     
-    var shakerView: UIImageView!
-    var shakerView2: UIImageView?
-    var image: UIImage!
+    // Universal shaker variables
+    var shakerImage: UIImage!
     
     var particlesImage: UIImage!
     var particlesImage2: UIImage!
+    
+    var theMotion: UIEventSubtype!
+    var theEvent: UIEvent!
+    
+    var shouldAnimate = false
+    
+    // Audio variables
+    var shakeSound: URL?
+    var audioPlayer: AVAudioPlayer?
+    var audioDuration: TimeInterval!
+    let defaultAudioDuration: TimeInterval = 0.6
+    
+    // Main shaker variables
+    var shakerView: UIImageView!
+    
     var particles1, particles2, particles3, particles4, particles5, particles6: UIImageView!
     var particles1b, particles2b, particles3b, particles4b, particles5b, particles6b: UIImageView!
-    var particles1Lrg, particles2Lrg, particles3Lrg, particles4Lrg, particles5Lrg, particles6Lrg: UIImageView?
-    var particles1bLrg, particles2bLrg, particles3bLrg, particles4bLrg, particles5bLrg, particles6bLrg: UIImageView?
-    
-    var shakeSound: URL?
-    var audioPlayer = AVAudioPlayer()
-    
-    let screenSize: CGSize = UIScreen.main.bounds.size
-    var screenXCenter: CGFloat?
-    var imgXPos: CGFloat?
     
     var startRect: CGRect!
+    var endRect: CGRect!
+
+    var partsStartRect: CGRect!
+    var partsEndRect: CGRect!
+    
+    // Secondary shaker variables
+    var shakerView2: UIImageView!
+    
+    var particles1Lrg, particles2Lrg, particles3Lrg, particles4Lrg, particles5Lrg, particles6Lrg: UIImageView!
+    var particles1bLrg, particles2bLrg, particles3bLrg, particles4bLrg, particles5bLrg, particles6bLrg: UIImageView!
+    
     var startRectLarge1: CGRect!
     var startRectLarge2: CGRect!
-    var endRect: CGRect!
     var endRectLarge1: CGRect!
     var endRectLarge2: CGRect!
     
-    var partsStartRect: CGRect!
     var partsStartRectLarge1: CGRect!
     var partsStartRectLarge2: CGRect!
-    var partsEndRect: CGRect!
     var partsEndRectLarge1: CGRect!
     var partsEndRectLarge2: CGRect!
-    
-    var isLargeScreen = false
-    
-    var theMotion: UIEventSubtype?
-    var theEvent: UIEvent?
-    
-    var shouldAnimate = false
     
     override var prefersStatusBarHidden : Bool {
         return true
@@ -76,13 +85,9 @@ class ShakerViewController: UIViewController {
         
     }
     
-    func leaveScreen(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     func setUpShakersForNormalScreen() {
         
-        shakerView = UIImageView(image: image)
+        shakerView = UIImageView(image: shakerImage)
 
         shakerView.frame = startRect
         
@@ -92,22 +97,22 @@ class ShakerViewController: UIViewController {
     
     func setUpShakersForLargeScreen() {
         
-        shakerView = UIImageView(image: image)
+        shakerView = UIImageView(image: shakerImage)
         
-        shakerView2 = UIImageView(image: image)
+        shakerView2 = UIImageView(image: shakerImage)
         shakerView.frame = startRectLarge1
-        shakerView2!.frame = startRectLarge2
+        shakerView2.frame = startRectLarge2
         
         self.view.addSubview(shakerView)
-        self.view.addSubview(shakerView2!)
+        self.view.addSubview(shakerView2)
         
     }
     
     func setUpParticlesForNormalScreen() {
         
         // Rects for normal screen
-        partsStartRect = CGRect(x: screenXCenter! - 70, y: view.bounds.height - 320, width: 140, height: 85)
-        partsEndRect = CGRect(x: screenXCenter! - 70, y: view.bounds.height, width: 140, height: 85)
+        partsStartRect = CGRect(x: screenXCenter - 70, y: view.bounds.height - 320, width: 140, height: 85)
+        partsEndRect = CGRect(x: screenXCenter - 70, y: view.bounds.height, width: 140, height: 85)
         
         // Set up all of the particles' parameters for a normal screen
         particles1 = UIImageView(image: particlesImage)
@@ -224,54 +229,54 @@ class ShakerViewController: UIViewController {
         
         // Set up all of the particles' parameters for a large screen (right side shaker)
         particles1Lrg = UIImageView(image: particlesImage)
-        particles1Lrg!.frame = partsStartRectLarge2
+        particles1Lrg.frame = partsStartRectLarge2
         
         particles2Lrg = UIImageView(image: particlesImage2)
-        particles2Lrg!.frame = partsStartRectLarge2
+        particles2Lrg.frame = partsStartRectLarge2
         
         particles3Lrg = UIImageView(image: particlesImage)
-        particles3Lrg!.frame = partsStartRectLarge2
+        particles3Lrg.frame = partsStartRectLarge2
         
         particles4Lrg = UIImageView(image: particlesImage2)
-        particles4Lrg!.frame = partsStartRectLarge2
+        particles4Lrg.frame = partsStartRectLarge2
         
         particles5Lrg = UIImageView(image: particlesImage)
-        particles5Lrg!.frame = partsStartRectLarge2
+        particles5Lrg.frame = partsStartRectLarge2
         
         particles6Lrg = UIImageView(image: particlesImage2)
-        particles6Lrg!.frame = partsStartRectLarge2
+        particles6Lrg.frame = partsStartRectLarge2
         
         particles1bLrg = UIImageView(image: particlesImage)
-        particles1bLrg!.frame = partsStartRectLarge2
+        particles1bLrg.frame = partsStartRectLarge2
         
         particles2bLrg = UIImageView(image: particlesImage2)
-        particles2bLrg!.frame = partsStartRectLarge2
+        particles2bLrg.frame = partsStartRectLarge2
         
         particles3bLrg = UIImageView(image: particlesImage)
-        particles3bLrg!.frame = partsStartRectLarge2
+        particles3bLrg.frame = partsStartRectLarge2
         
         particles4bLrg = UIImageView(image: particlesImage2)
-        particles4bLrg!.frame = partsStartRectLarge2
+        particles4bLrg.frame = partsStartRectLarge2
         
         particles5bLrg = UIImageView(image: particlesImage)
-        particles5bLrg!.frame = partsStartRectLarge2
+        particles5bLrg.frame = partsStartRectLarge2
         
         particles6bLrg = UIImageView(image: particlesImage2)
-        particles6bLrg!.frame = partsStartRectLarge2
+        particles6bLrg.frame = partsStartRectLarge2
         
-        view.addSubview(particles1Lrg!)
-        view.addSubview(particles2Lrg!)
-        view.addSubview(particles3Lrg!)
-        view.addSubview(particles4Lrg!)
-        view.addSubview(particles5Lrg!)
-        view.addSubview(particles6Lrg!)
+        view.addSubview(particles1Lrg)
+        view.addSubview(particles2Lrg)
+        view.addSubview(particles3Lrg)
+        view.addSubview(particles4Lrg)
+        view.addSubview(particles5Lrg)
+        view.addSubview(particles6Lrg)
         
-        view.addSubview(particles1bLrg!)
-        view.addSubview(particles2bLrg!)
-        view.addSubview(particles3bLrg!)
-        view.addSubview(particles4bLrg!)
-        view.addSubview(particles5bLrg!)
-        view.addSubview(particles6bLrg!)
+        view.addSubview(particles1bLrg)
+        view.addSubview(particles2bLrg)
+        view.addSubview(particles3bLrg)
+        view.addSubview(particles4bLrg)
+        view.addSubview(particles5bLrg)
+        view.addSubview(particles6bLrg)
         
     }
     
@@ -279,17 +284,39 @@ class ShakerViewController: UIViewController {
         
         // Load file
         guard let soundPath = Bundle.main.path(forResource: filename, ofType: "wav") else {
+            
+            let alertVc = UIAlertController(title: "Heads Up", message: "It's not your device. Sorry, something went wrong loading the sound so there won't be an audio.", preferredStyle: .alert)
+            alertVc.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alertVc, animated: true, completion: nil)
+            
+            audioDuration = defaultAudioDuration
+            
             return
+            
         }
         shakeSound = URL(fileURLWithPath: soundPath)
         
         // Prepare player
         do {
+            
             audioPlayer = try AVAudioPlayer(contentsOf: shakeSound!, fileTypeHint: nil)
-            audioPlayer.prepareToPlay()
+            
+            if let player = audioPlayer {
+                audioDuration = player.duration
+                player.prepareToPlay()
+            } else {
+                audioDuration = defaultAudioDuration
+            }
+            
         } catch {
-            print("Could not prepare to play sound")
-            print(error)
+            
+//            print("Could not prepare to play sound")
+//            print(error)
+            
+            let alertVc = UIAlertController(title: "Heads Up", message: "It's not your device. Sorry, something went wrong loading the sound so there won't be an audio.", preferredStyle: .alert)
+            alertVc.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alertVc, animated: true, completion: nil)
+            
         }
         
     }
@@ -297,41 +324,37 @@ class ShakerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Initialize view-specific variables
-        image = UIImage(named: shakerName)
+        // Initialize shaker-specific variables
+        shakerImage = UIImage(named: shakerName)
         particlesImage = UIImage(named: particlesName)
         particlesImage2 = UIImage(named: "\(particlesName)Flipped")
-        setUpAudioPlayer(filename: soundName)
+        
         
         // Size variables
         screenXCenter = screenSize.width/2
-        imgXPos = (screenXCenter! - (320/2))
-        
-        if screenSize.width > 500 {
-            isLargeScreen = true
-        }
+        imgXPos = (screenXCenter - (320/2))
+        isLargeScreen = screenSize.width > 500
         
         // Set up the initial view
         self.view.backgroundColor = UIColor(red: 0.0, green: 184/255, blue: 235/255, alpha: 1.0)
-        
-        ///////// Can possibly move to if statements to avoid instantiating extras
-        startRect = CGRect(x: imgXPos!, y: 0.0, width: 320.0, height: 434.9)
-        startRectLarge1 = CGRect(x: 0.0, y: 0.0, width: 320.0, height: 434.9)
-        startRectLarge2 = CGRect(x: (screenSize.width - 320.0), y: 0.0, width: 320.0, height: 434.9)
-        
-        endRect = CGRect(x: imgXPos!, y: 170.0, width: 320.0, height: 434.9)
-        endRectLarge1 = CGRect(x: 0.0, y: 170.0, width: 320.0, height: 434.9)
-        endRectLarge2 = CGRect(x: (screenSize.width - 320.0), y: 170.0, width: 320.0, height: 434.9)
-        /////////
-        
         makeDoneButton()
         
+        // Set up the shaker(s)
         if isLargeScreen {
+            
+            startRectLarge1 = CGRect(x: 0.0, y: 0.0, width: 320.0, height: 434.9)
+            startRectLarge2 = CGRect(x: (screenSize.width - 320.0), y: 0.0, width: 320.0, height: 434.9)
+            endRectLarge1 = CGRect(x: 0.0, y: 170.0, width: 320.0, height: 434.9)
+            endRectLarge2 = CGRect(x: (screenSize.width - 320.0), y: 170.0, width: 320.0, height: 434.9)
             
             setUpParticlesForLargeScreen()
             setUpShakersForLargeScreen()
             
+            
         } else {
+            
+            startRect = CGRect(x: imgXPos, y: 0.0, width: 320.0, height: 434.9)
+            endRect = CGRect(x: imgXPos, y: 170.0, width: 320.0, height: 434.9)
             
             setUpParticlesForNormalScreen()
             setUpShakersForNormalScreen()
@@ -340,9 +363,16 @@ class ShakerViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setUpAudioPlayer(filename: soundName)
+        
+    }
+    
     func animateForNormalScreen() {
         
-        UIView.animateKeyframes(withDuration: audioPlayer.duration, delay: 0.0, options: [], animations: {
+        UIView.animateKeyframes(withDuration: audioDuration, delay: 0.0, options: [], animations: {
             
             UIView.addKeyframe(withRelativeStartTime: 0/60, relativeDuration: 10/60, animations: { _ in
                 self.shakerView.frame = self.endRect
@@ -410,21 +440,21 @@ class ShakerViewController: UIViewController {
                 self.particles6b.frame = self.partsEndRect
             })
             
-        }, completion: { [weak self] (completed: Bool) in
+        }, completion: { (completed: Bool) in
             
-            self!.particles1.frame = self!.partsStartRect
-            self!.particles2.frame = self!.partsStartRect
-            self!.particles3.frame = self!.partsStartRect
-            self!.particles4.frame = self!.partsStartRect
-            self!.particles5.frame = self!.partsStartRect
-            self!.particles6.frame = self!.partsStartRect
+            self.particles1.frame = self.partsStartRect
+            self.particles2.frame = self.partsStartRect
+            self.particles3.frame = self.partsStartRect
+            self.particles4.frame = self.partsStartRect
+            self.particles5.frame = self.partsStartRect
+            self.particles6.frame = self.partsStartRect
             
-            self!.particles1b.frame = self!.partsStartRect
-            self!.particles2b.frame = self!.partsStartRect
-            self!.particles3b.frame = self!.partsStartRect
-            self!.particles4b.frame = self!.partsStartRect
-            self!.particles5b.frame = self!.partsStartRect
-            self!.particles6b.frame = self!.partsStartRect
+            self.particles1b.frame = self.partsStartRect
+            self.particles2b.frame = self.partsStartRect
+            self.particles3b.frame = self.partsStartRect
+            self.particles4b.frame = self.partsStartRect
+            self.particles5b.frame = self.partsStartRect
+            self.particles6b.frame = self.partsStartRect
             
             return
         })
@@ -433,185 +463,185 @@ class ShakerViewController: UIViewController {
     
     func animateForLargeScreen() {
         
-        UIView.animateKeyframes(withDuration: audioPlayer.duration, delay: 0.0, options: [], animations: {
+        UIView.animateKeyframes(withDuration: audioDuration, delay: 0.0, options: [], animations: {
             
             UIView.addKeyframe(withRelativeStartTime: 0/60, relativeDuration: 10/60, animations: { _ in
                 self.shakerView.frame = self.endRectLarge1
-                self.shakerView2!.frame = self.endRectLarge2
+                self.shakerView2.frame = self.endRectLarge2
             })
             UIView.addKeyframe(withRelativeStartTime: 10/60, relativeDuration: 20/60, animations: { _ in
                 self.shakerView.frame = self.startRectLarge1
-                self.shakerView2!.frame = self.startRectLarge2
+                self.shakerView2.frame = self.startRectLarge2
             })
             
             UIView.addKeyframe(withRelativeStartTime: 9/60, relativeDuration: 19/60, animations: { _ in
                 // Particle layer one
                 self.particles1.frame = self.partsEndRectLarge1
-                self.particles1Lrg!.frame = self.partsEndRectLarge2
+                self.particles1Lrg.frame = self.partsEndRectLarge2
                 
                 self.particles1.alpha = 0.2
-                self.particles1Lrg!.alpha = 0.2
+                self.particles1Lrg.alpha = 0.2
             })
             UIView.addKeyframe(withRelativeStartTime: 12/60, relativeDuration: 18/60, animations: { _ in
                 // Particle layer two
                 self.particles2.frame = self.partsEndRectLarge1
-                self.particles2Lrg!.frame = self.partsEndRectLarge2
+                self.particles2Lrg.frame = self.partsEndRectLarge2
                 
                 self.particles2.alpha = 0.2
-                self.particles2Lrg!.alpha = 0.2
+                self.particles2Lrg.alpha = 0.2
             })
             UIView.addKeyframe(withRelativeStartTime: 15/60, relativeDuration: 22/60, animations: { _ in
                 // Particle layer three
                 self.particles3.frame = self.partsEndRectLarge1
-                self.particles3Lrg!.frame = self.partsEndRectLarge2
+                self.particles3Lrg.frame = self.partsEndRectLarge2
                 
                 self.particles3.alpha = 0.2
-                self.particles3Lrg!.alpha = 0.2
+                self.particles3Lrg.alpha = 0.2
             })
             UIView.addKeyframe(withRelativeStartTime: 18/60, relativeDuration: 20/60, animations: { _ in
                 // Particle layer four
                 self.particles4.frame = self.partsEndRectLarge1
-                self.particles4Lrg!.frame = self.partsEndRectLarge2
+                self.particles4Lrg.frame = self.partsEndRectLarge2
                 
                 self.particles4.alpha = 0.2
-                self.particles4Lrg!.alpha = 0.2
+                self.particles4Lrg.alpha = 0.2
             })
             UIView.addKeyframe(withRelativeStartTime: 21/60, relativeDuration: 15/60, animations: { _ in
                 // Particle layer five
                 self.particles5.frame = self.partsEndRectLarge1
-                self.particles5Lrg!.frame = self.partsEndRectLarge2
+                self.particles5Lrg.frame = self.partsEndRectLarge2
                 
                 self.particles5.alpha = 0.2
-                self.particles5Lrg!.alpha = 0.2
+                self.particles5Lrg.alpha = 0.2
             })
             UIView.addKeyframe(withRelativeStartTime: 24/60, relativeDuration: 17/60, animations: { _ in
                 // Particle layer six
                 self.particles6.frame = self.partsEndRectLarge1
-                self.particles6Lrg!.frame = self.partsEndRectLarge2
+                self.particles6Lrg.frame = self.partsEndRectLarge2
                 
                 self.particles6.alpha = 0.2
-                self.particles6Lrg!.alpha = 0.2
+                self.particles6Lrg.alpha = 0.2
             })
             
             self.motionEnded(self.theMotion!, with: self.theEvent!)
             
             UIView.addKeyframe(withRelativeStartTime: 30/60, relativeDuration: 10/60, animations: { _ in
                 self.shakerView.frame = self.endRectLarge1
-                self.shakerView2!.frame = self.endRectLarge2
+                self.shakerView2.frame = self.endRectLarge2
             })
             UIView.addKeyframe(withRelativeStartTime: 40/60, relativeDuration: 20/60, animations: { _ in
                 self.shakerView.frame = self.startRectLarge1
-                self.shakerView2!.frame = self.startRectLarge2
+                self.shakerView2.frame = self.startRectLarge2
             })
             
             UIView.addKeyframe(withRelativeStartTime: 9/60, relativeDuration: 19/60, animations: { _ in
                 // Particle layer one
                 self.particles1b.frame = self.partsEndRectLarge1
-                self.particles1bLrg!.frame = self.partsEndRectLarge2
+                self.particles1bLrg.frame = self.partsEndRectLarge2
                 
                 self.particles1b.alpha = 0.2
-                self.particles1bLrg!.alpha = 0.2
+                self.particles1bLrg.alpha = 0.2
             })
             UIView.addKeyframe(withRelativeStartTime: 12/60, relativeDuration: 18/60, animations: { _ in
                 // Particle layer two
                 self.particles2b.frame = self.partsEndRectLarge1
-                self.particles2bLrg!.frame = self.partsEndRectLarge2
+                self.particles2bLrg.frame = self.partsEndRectLarge2
                 
                 self.particles2b.alpha = 0.2
-                self.particles2bLrg!.alpha = 0.2
+                self.particles2bLrg.alpha = 0.2
             })
             UIView.addKeyframe(withRelativeStartTime: 15/60, relativeDuration: 22/60, animations: { _ in
                 // Particle layer three
                 self.particles3b.frame = self.partsEndRectLarge1
-                self.particles3bLrg!.frame = self.partsEndRectLarge2
+                self.particles3bLrg.frame = self.partsEndRectLarge2
                 
                 self.particles3b.alpha = 0.2
-                self.particles3bLrg!.alpha = 0.2
+                self.particles3bLrg.alpha = 0.2
             })
             UIView.addKeyframe(withRelativeStartTime: 18/60, relativeDuration: 20/60, animations: { _ in
                 // Particle layer four
                 self.particles4b.frame = self.partsEndRectLarge1
-                self.particles4bLrg!.frame = self.partsEndRectLarge2
+                self.particles4bLrg.frame = self.partsEndRectLarge2
                 
                 self.particles4b.alpha = 0.2
-                self.particles4bLrg!.alpha = 0.2
+                self.particles4bLrg.alpha = 0.2
             })
             UIView.addKeyframe(withRelativeStartTime: 21/60, relativeDuration: 15/60, animations: { _ in
                 // Particle layer five
                 self.particles5b.frame = self.partsEndRectLarge1
-                self.particles5bLrg!.frame = self.partsEndRectLarge2
+                self.particles5bLrg.frame = self.partsEndRectLarge2
                 
                 self.particles5b.alpha = 0.2
-                self.particles5bLrg!.alpha = 0.2
+                self.particles5bLrg.alpha = 0.2
             })
             UIView.addKeyframe(withRelativeStartTime: 24/60, relativeDuration: 17/60, animations: { _ in
                 // Particle layer six
                 self.particles6b.frame = self.partsEndRectLarge1
-                self.particles6bLrg!.frame = self.partsEndRectLarge2
+                self.particles6bLrg.frame = self.partsEndRectLarge2
                 
                 self.particles6b.alpha = 0.2
-                self.particles6bLrg!.alpha = 0.2
+                self.particles6bLrg.alpha = 0.2
             })
             
-        }, completion: { [weak self] (completed: Bool) in
+        }, completion: { (completed: Bool) in
             
             // Reset position
-            self!.particles1.frame = self!.partsStartRectLarge1
-            self!.particles2.frame = self!.partsStartRectLarge1
-            self!.particles3.frame = self!.partsStartRectLarge1
-            self!.particles4.frame = self!.partsStartRectLarge1
-            self!.particles5.frame = self!.partsStartRectLarge1
-            self!.particles6.frame = self!.partsStartRectLarge1
+            self.particles1.frame = self.partsStartRectLarge1
+            self.particles2.frame = self.partsStartRectLarge1
+            self.particles3.frame = self.partsStartRectLarge1
+            self.particles4.frame = self.partsStartRectLarge1
+            self.particles5.frame = self.partsStartRectLarge1
+            self.particles6.frame = self.partsStartRectLarge1
             
-            self!.particles1b.frame = self!.partsStartRectLarge1
-            self!.particles2b.frame = self!.partsStartRectLarge1
-            self!.particles3b.frame = self!.partsStartRectLarge1
-            self!.particles4b.frame = self!.partsStartRectLarge1
-            self!.particles5b.frame = self!.partsStartRectLarge1
-            self!.particles6b.frame = self!.partsStartRectLarge1
+            self.particles1b.frame = self.partsStartRectLarge1
+            self.particles2b.frame = self.partsStartRectLarge1
+            self.particles3b.frame = self.partsStartRectLarge1
+            self.particles4b.frame = self.partsStartRectLarge1
+            self.particles5b.frame = self.partsStartRectLarge1
+            self.particles6b.frame = self.partsStartRectLarge1
             
-            self!.particles1Lrg!.frame = self!.partsStartRectLarge2
-            self!.particles2Lrg!.frame = self!.partsStartRectLarge2
-            self!.particles3Lrg!.frame = self!.partsStartRectLarge2
-            self!.particles4Lrg!.frame = self!.partsStartRectLarge2
-            self!.particles5Lrg!.frame = self!.partsStartRectLarge2
-            self!.particles6Lrg!.frame = self!.partsStartRectLarge2
+            self.particles1Lrg.frame = self.partsStartRectLarge2
+            self.particles2Lrg.frame = self.partsStartRectLarge2
+            self.particles3Lrg.frame = self.partsStartRectLarge2
+            self.particles4Lrg.frame = self.partsStartRectLarge2
+            self.particles5Lrg.frame = self.partsStartRectLarge2
+            self.particles6Lrg.frame = self.partsStartRectLarge2
             
-            self!.particles1bLrg!.frame = self!.partsStartRectLarge2
-            self!.particles2bLrg!.frame = self!.partsStartRectLarge2
-            self!.particles3bLrg!.frame = self!.partsStartRectLarge2
-            self!.particles4bLrg!.frame = self!.partsStartRectLarge2
-            self!.particles5bLrg!.frame = self!.partsStartRectLarge2
-            self!.particles6bLrg!.frame = self!.partsStartRectLarge2
+            self.particles1bLrg.frame = self.partsStartRectLarge2
+            self.particles2bLrg.frame = self.partsStartRectLarge2
+            self.particles3bLrg.frame = self.partsStartRectLarge2
+            self.particles4bLrg.frame = self.partsStartRectLarge2
+            self.particles5bLrg.frame = self.partsStartRectLarge2
+            self.particles6bLrg.frame = self.partsStartRectLarge2
             
             // Alpha levels back to normal
-            self!.particles1.alpha = 1.0
-            self!.particles2.alpha = 1.0
-            self!.particles3.alpha = 1.0
-            self!.particles4.alpha = 1.0
-            self!.particles5.alpha = 1.0
-            self!.particles6.alpha = 1.0
+            self.particles1.alpha = 1.0
+            self.particles2.alpha = 1.0
+            self.particles3.alpha = 1.0
+            self.particles4.alpha = 1.0
+            self.particles5.alpha = 1.0
+            self.particles6.alpha = 1.0
             
-            self!.particles1b.alpha = 1.0
-            self!.particles2b.alpha = 1.0
-            self!.particles3b.alpha = 1.0
-            self!.particles4b.alpha = 1.0
-            self!.particles5b.alpha = 1.0
-            self!.particles6b.alpha = 1.0
+            self.particles1b.alpha = 1.0
+            self.particles2b.alpha = 1.0
+            self.particles3b.alpha = 1.0
+            self.particles4b.alpha = 1.0
+            self.particles5b.alpha = 1.0
+            self.particles6b.alpha = 1.0
             
-            self!.particles1Lrg!.alpha = 1.0
-            self!.particles2Lrg!.alpha = 1.0
-            self!.particles3Lrg!.alpha = 1.0
-            self!.particles4Lrg!.alpha = 1.0
-            self!.particles5Lrg!.alpha = 1.0
-            self!.particles6Lrg!.alpha = 1.0
+            self.particles1Lrg.alpha = 1.0
+            self.particles2Lrg.alpha = 1.0
+            self.particles3Lrg.alpha = 1.0
+            self.particles4Lrg.alpha = 1.0
+            self.particles5Lrg.alpha = 1.0
+            self.particles6Lrg.alpha = 1.0
             
-            self!.particles1bLrg!.alpha = 1.0
-            self!.particles2bLrg!.alpha = 1.0
-            self!.particles3bLrg!.alpha = 1.0
-            self!.particles4bLrg!.alpha = 1.0
-            self!.particles5bLrg!.alpha = 1.0
-            self!.particles6bLrg!.alpha = 1.0
+            self.particles1bLrg.alpha = 1.0
+            self.particles2bLrg.alpha = 1.0
+            self.particles3bLrg.alpha = 1.0
+            self.particles4bLrg.alpha = 1.0
+            self.particles5bLrg.alpha = 1.0
+            self.particles6bLrg.alpha = 1.0
             
             return
         })
@@ -621,7 +651,9 @@ class ShakerViewController: UIViewController {
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
         
         // Code for playing sound
-        audioPlayer.play()
+        if let player = audioPlayer {
+            player.play()
+        }
         
         theEvent = event
         theMotion = motion
@@ -643,7 +675,16 @@ class ShakerViewController: UIViewController {
         
         shouldAnimate = false;
         
-        print("Motion did end")
+//        print("Motion did end")
+        
+    }
+    
+    func leaveScreen() {
+        
+        if let player = audioPlayer {
+            player.stop()
+        }
+        dismiss(animated: true, completion: nil)
         
     }
     

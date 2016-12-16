@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  SaltShaker
 //
-//  Created by Matteo Manzi on 11/25/14.
-//  Copyright (c) 2014 Virginia Manzi. All rights reserved.
+//  Created by Matthew Manzi on 11/25/14.
+//  Copyright (c) 2016 Matthew Manzi. All rights reserved.
 //
 
 import UIKit

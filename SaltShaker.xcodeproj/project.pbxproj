@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A7671721E0394CC001991A4 /* ParticlesCreateTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7671711E0394CC001991A4 /* ParticlesCreateTimeTests.swift */; };
 		8A7EA9DD1E00627600B00FD3 /* ShakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7EA9DC1E00627600B00FD3 /* ShakerViewController.swift */; };
 		9802C6C51A81210B00DDFB13 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9802C6C41A81210B00DDFB13 /* HomeScreenViewController.swift */; };
 		9802C6CB1A81294200DDFB13 /* blankButtonHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 9802C6C71A81294200DDFB13 /* blankButtonHighlighted.png */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8A7671711E0394CC001991A4 /* ParticlesCreateTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticlesCreateTimeTests.swift; sourceTree = "<group>"; };
 		8A7EA9DC1E00627600B00FD3 /* ShakerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShakerViewController.swift; sourceTree = "<group>"; };
 		9802C6C21A81206E00DDFB13 /* ViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		9802C6C41A81210B00DDFB13 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 		987ADDAB1A25276600B09042 /* SaltShakerTests */ = {
 			isa = PBXGroup;
 			children = (
+				8A7671711E0394CC001991A4 /* ParticlesCreateTimeTests.swift */,
 				987ADDAE1A25276600B09042 /* SaltShakerTests.swift */,
 				987ADDAC1A25276600B09042 /* Supporting Files */,
 			);
@@ -568,6 +571,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				987ADDAF1A25276600B09042 /* SaltShakerTests.swift in Sources */,
+				8A7671721E0394CC001991A4 /* ParticlesCreateTimeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,7 +635,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -670,7 +674,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -727,6 +731,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = SaltShakerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.VMM.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -744,6 +749,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = SaltShakerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.VMM.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

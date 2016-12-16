@@ -2,8 +2,8 @@
 //  HomeScreenViewController.swift
 //  SaltShaker
 //
-//  Created by Matteo Manzi on 2/3/15.
-//  Copyright (c) 2015 Virginia Manzi. All rights reserved.
+//  Created by Matthew Manzi on 2/3/15.
+//  Copyright (c) 2016 Matthew Manzi. All rights reserved.
 //
 
 import UIKit
