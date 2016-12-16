@@ -10,14 +10,14 @@ import UIKit
 import AVFoundation
 
 class ShakerViewController: UIViewController {
-
+    
     // Instantiation-time variables (shaker specific)
     var shakerName: String = "saltShaker"
     var particlesName: String = "Particles"
     var soundName: String = "salt_shake4"
     
     // View variables
-    let screenSize: CGSize = UIScreen.main.bounds.size
+    let SCREEN_SIZE: CGSize = UIScreen.main.bounds.size
     var screenXCenter: CGFloat!
     var imgXPos: CGFloat!
     var isLargeScreen = false
@@ -35,10 +35,10 @@ class ShakerViewController: UIViewController {
     var shouldAnimate = false
     
     // Audio variables
+    let DEFAULT_AUDIO_DURATION: TimeInterval = 0.6
     var shakeSound: URL?
     var audioPlayer: AVAudioPlayer?
     var audioDuration: TimeInterval!
-    let defaultAudioDuration: TimeInterval = 0.6
     
     // Main shaker variables
     var shakerView: UIImageView!
@@ -48,7 +48,7 @@ class ShakerViewController: UIViewController {
     
     var startRect: CGRect!
     var endRect: CGRect!
-
+    
     var partsStartRect: CGRect!
     var partsEndRect: CGRect!
     
@@ -171,9 +171,9 @@ class ShakerViewController: UIViewController {
         
         // Rects for large screen
         partsStartRectLarge1 = CGRect(x: 90, y: 300, width: 140, height: 85)
-        partsStartRectLarge2 = CGRect(x: screenSize.width - 230, y: 300, width: 140, height: 85)
-        partsEndRectLarge1 = CGRect(x: 90, y: screenSize.height, width: 140, height: 85)
-        partsEndRectLarge2 = CGRect(x: screenSize.width - 200, y: screenSize.height, width: 140, height: 85)
+        partsStartRectLarge2 = CGRect(x: SCREEN_SIZE.width - 230, y: 300, width: 140, height: 85)
+        partsEndRectLarge1 = CGRect(x: 90, y: SCREEN_SIZE.height, width: 140, height: 85)
+        partsEndRectLarge2 = CGRect(x: SCREEN_SIZE.width - 200, y: SCREEN_SIZE.height, width: 140, height: 85)
         
         // Set up all of the particles' parameters for a large screen (left side shaker)
         particles1 = UIImageView(image: particlesImage)
@@ -289,7 +289,7 @@ class ShakerViewController: UIViewController {
             alertVc.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alertVc, animated: true, completion: nil)
             
-            audioDuration = defaultAudioDuration
+            audioDuration = DEFAULT_AUDIO_DURATION
             
             return
             
@@ -305,7 +305,7 @@ class ShakerViewController: UIViewController {
                 audioDuration = player.duration
                 player.prepareToPlay()
             } else {
-                audioDuration = defaultAudioDuration
+                audioDuration = DEFAULT_AUDIO_DURATION
             }
             
         } catch {
@@ -331,9 +331,9 @@ class ShakerViewController: UIViewController {
         
         
         // Size variables
-        screenXCenter = screenSize.width/2
+        screenXCenter = SCREEN_SIZE.width/2
         imgXPos = (screenXCenter - (320/2))
-        isLargeScreen = screenSize.width > 500
+        isLargeScreen = SCREEN_SIZE.width > 500
         
         // Set up the initial view
         self.view.backgroundColor = UIColor(red: 0.0, green: 184/255, blue: 235/255, alpha: 1.0)
@@ -343,9 +343,9 @@ class ShakerViewController: UIViewController {
         if isLargeScreen {
             
             startRectLarge1 = CGRect(x: 0.0, y: 0.0, width: 320.0, height: 434.9)
-            startRectLarge2 = CGRect(x: (screenSize.width - 320.0), y: 0.0, width: 320.0, height: 434.9)
+            startRectLarge2 = CGRect(x: (SCREEN_SIZE.width - 320.0), y: 0.0, width: 320.0, height: 434.9)
             endRectLarge1 = CGRect(x: 0.0, y: 170.0, width: 320.0, height: 434.9)
-            endRectLarge2 = CGRect(x: (screenSize.width - 320.0), y: 170.0, width: 320.0, height: 434.9)
+            endRectLarge2 = CGRect(x: (SCREEN_SIZE.width - 320.0), y: 170.0, width: 320.0, height: 434.9)
             
             setUpParticlesForLargeScreen()
             setUpShakersForLargeScreen()

@@ -14,13 +14,13 @@ class HomeScreenViewController: UIViewController {
 	var pepperButton: UIButton!
 	var infoButton: UIButton!
 	
-	let normalButtonImage = UIImage(named: "blankButtonNormal")
-	let highlightedButtonImage = UIImage(named: "blankButtonHighlighted")
+	let NORMAL_BUTTON_IMAGE = UIImage(named: "blankButtonNormal")
+	let HIGHLIGHTED_BUTTON_IMAGE = UIImage(named: "blankButtonHighlighted")
 	
-	let buttonSize = CGSize(width: 140, height: 45)
+	let BUTTON_SIZE = CGSize(width: 140, height: 45)
 	
-	var logoImageView: UIImageView!
-	let logoImage = UIImage(named: "LogoImage")
+	let LOGO_IMAGE = UIImage(named: "LogoImage")
+    var logoImageView: UIImageView!
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -31,10 +31,10 @@ class HomeScreenViewController: UIViewController {
 		let saltButtonPoint = CGPoint(x: view.center.x, y: view.center.y - 20)
 		
 		saltButton = UIButton(type: UIButtonType.custom)
-		saltButton.frame.size = buttonSize
+		saltButton.frame.size = BUTTON_SIZE
 		saltButton.center = saltButtonPoint
-		saltButton.setBackgroundImage(normalButtonImage, for: UIControlState())
-		saltButton.setBackgroundImage(highlightedButtonImage, for: .highlighted)
+		saltButton.setBackgroundImage(NORMAL_BUTTON_IMAGE, for: UIControlState())
+		saltButton.setBackgroundImage(HIGHLIGHTED_BUTTON_IMAGE, for: .highlighted)
 		saltButton.setTitle("Salt Shaker", for: UIControlState())
 		saltButton.setTitleColor(UIColor.white, for: UIControlState())
 		saltButton.setTitleShadowColor(UIColor.darkGray, for: UIControlState())
@@ -50,10 +50,10 @@ class HomeScreenViewController: UIViewController {
 		let pepperButtonPoint = CGPoint(x: view.center.x, y: view.center.y + 60)
 		
 		pepperButton = UIButton(type: UIButtonType.custom)
-		pepperButton.frame.size = buttonSize
+		pepperButton.frame.size = BUTTON_SIZE
 		pepperButton.center = pepperButtonPoint
-		pepperButton.setBackgroundImage(normalButtonImage, for: UIControlState())
-		pepperButton.setBackgroundImage(highlightedButtonImage, for: .highlighted)
+		pepperButton.setBackgroundImage(NORMAL_BUTTON_IMAGE, for: UIControlState())
+		pepperButton.setBackgroundImage(HIGHLIGHTED_BUTTON_IMAGE, for: .highlighted)
 		pepperButton.setTitle("Pepper Shaker", for: UIControlState())
 		pepperButton.setTitleColor(UIColor.white, for: UIControlState())
 		pepperButton.setTitleShadowColor(UIColor.darkGray, for: UIControlState())
@@ -71,8 +71,8 @@ class HomeScreenViewController: UIViewController {
 		infoButton = UIButton(type: UIButtonType.custom)
 		infoButton.frame.size = CGSize(width: 70, height: 45)
 		infoButton.center = infoButtonPoint
-		infoButton.setBackgroundImage(normalButtonImage, for: UIControlState())
-		infoButton.setBackgroundImage(highlightedButtonImage, for: .highlighted)
+		infoButton.setBackgroundImage(NORMAL_BUTTON_IMAGE, for: UIControlState())
+		infoButton.setBackgroundImage(HIGHLIGHTED_BUTTON_IMAGE, for: .highlighted)
 		infoButton.setTitle("Credits", for: UIControlState())
 		infoButton.setTitleColor(UIColor.white, for: UIControlState())
 		infoButton.setTitleShadowColor(UIColor.darkGray, for: UIControlState())
@@ -117,7 +117,7 @@ class HomeScreenViewController: UIViewController {
 		
 		self.view.backgroundColor = UIColor(red: 0.0, green: 184/255, blue: 235/255, alpha: 1.0)
 		
-		logoImageView = UIImageView(image: logoImage)
+		logoImageView = UIImageView(image: LOGO_IMAGE)
 		logoImageView.frame.size = CGSize(width: view.bounds.width, height: view.bounds.width / 2)
 		
 		view.addSubview(logoImageView)

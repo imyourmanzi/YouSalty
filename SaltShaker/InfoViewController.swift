@@ -63,7 +63,7 @@ class InfoViewController: UIViewController {
 		
     }
 
-    func leaveInfoScreen(_ sender: UIButton) {
+    func leaveInfoScreen() {
         dismiss(animated: true, completion: nil)
     }
     
