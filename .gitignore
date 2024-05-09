@@ -1,0 +1,4 @@
+**/project.xcworkspace/xcuserdata
+**/project.xcworkspace/xcshareddata
+*.xcodeproj/xcuserdata
+.DS_Store
