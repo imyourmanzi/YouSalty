@@ -16,7 +16,6 @@ class HomeScreenViewController: UIViewController {
 	
 	let NORMAL_BUTTON_IMAGE = UIImage(named: "blankButtonNormal")
 	let HIGHLIGHTED_BUTTON_IMAGE = UIImage(named: "blankButtonHighlighted")
-	
 	let BUTTON_SIZE = CGSize(width: 140, height: 45)
 	
 	let LOGO_IMAGE = UIImage(named: "LogoImage")
@@ -82,6 +81,22 @@ class HomeScreenViewController: UIViewController {
 		infoButton.addTarget(self, action: #selector(openInfoViewController), for: .touchUpInside)
 		
 	}
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor(red: 0.0, green: 184/255, blue: 235/255, alpha: 1.0)
+        
+        logoImageView = UIImageView(image: LOGO_IMAGE)
+        logoImageView.frame.size = CGSize(width: view.bounds.width, height: view.bounds.width / 2)
+        
+        view.addSubview(logoImageView)
+        
+        createSaltButton()
+        createPepperButton()
+        createInfoButton()
+        
+    }
 	
 	func openSaltViewController() {
 		
@@ -111,22 +126,5 @@ class HomeScreenViewController: UIViewController {
 		present(infoVc, animated: true, completion: nil)
 		
 	}
-	
-    override func viewDidLoad() {
-        super.viewDidLoad()
-		
-		self.view.backgroundColor = UIColor(red: 0.0, green: 184/255, blue: 235/255, alpha: 1.0)
-		
-		logoImageView = UIImageView(image: LOGO_IMAGE)
-		logoImageView.frame.size = CGSize(width: view.bounds.width, height: view.bounds.width / 2)
-		
-		view.addSubview(logoImageView)
-		
-		createSaltButton()
-		createPepperButton()
-		createInfoButton()
-		
-		
-    }
 
 }

@@ -29,9 +29,6 @@ class ShakerViewController: UIViewController {
     var particlesImage: UIImage!
     var particlesImage2: UIImage!
     
-    var theMotion: UIEventSubtype!
-    var theEvent: UIEvent!
-    
     var shouldAnimate = false
     
     // Audio variables
@@ -226,7 +223,6 @@ class ShakerViewController: UIViewController {
         view.addSubview(particles5b)
         view.addSubview(particles6b)
         
-        
         // Set up all of the particles' parameters for a large screen (right side shaker)
         particles1Lrg = UIImageView(image: particlesImage)
         particles1Lrg.frame = partsStartRectLarge2
@@ -310,9 +306,6 @@ class ShakerViewController: UIViewController {
             
         } catch {
             
-//            print("Could not prepare to play sound")
-//            print(error)
-            
             let alertVc = UIAlertController(title: "Heads Up", message: "It's not your device. Sorry, something went wrong loading the sound so there won't be an audio.", preferredStyle: .alert)
             alertVc.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alertVc, animated: true, completion: nil)
@@ -328,7 +321,6 @@ class ShakerViewController: UIViewController {
         shakerImage = UIImage(named: shakerName)
         particlesImage = UIImage(named: particlesName)
         particlesImage2 = UIImage(named: "\(particlesName)Flipped")
-        
         
         // Size variables
         screenXCenter = SCREEN_SIZE.width/2
@@ -406,7 +398,7 @@ class ShakerViewController: UIViewController {
                 self.particles6.frame = self.partsEndRect
             })
             
-            self.motionEnded(self.theMotion!, with: self.theEvent!)
+            self.shouldAnimate = false
             
             UIView.addKeyframe(withRelativeStartTime: 30/60, relativeDuration: 10/60, animations: { _ in
                 self.shakerView.frame = self.endRect
@@ -523,7 +515,7 @@ class ShakerViewController: UIViewController {
                 self.particles6Lrg.alpha = 0.2
             })
             
-            self.motionEnded(self.theMotion!, with: self.theEvent!)
+            self.shouldAnimate = false
             
             UIView.addKeyframe(withRelativeStartTime: 30/60, relativeDuration: 10/60, animations: { _ in
                 self.shakerView.frame = self.endRectLarge1
@@ -655,9 +647,6 @@ class ShakerViewController: UIViewController {
             player.play()
         }
         
-        theEvent = event
-        theMotion = motion
-        
         shouldAnimate = true
         
         while shouldAnimate {
@@ -669,14 +658,6 @@ class ShakerViewController: UIViewController {
             }
             
         }
-    }
-    
-    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
-        
-        shouldAnimate = false;
-        
-//        print("Motion did end")
-        
     }
     
     func leaveScreen() {

@@ -490,7 +490,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0820;
-				ORGANIZATIONNAME = "";
+				ORGANIZATIONNAME = "MRM Software";
 				TargetAttributes = {
 					987ADD921A25276500B09042 = {
 						CreatedOnToolsVersion = 6.1;
